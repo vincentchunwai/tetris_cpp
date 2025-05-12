@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/vorbis-populate"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/9c33ad05075a4bf88776cdea96029543/vorbis-populate.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/4d246e84e713213b0508987ddd6b401a/vorbis-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"vorbis-populate"
+		],
+		"name" : "vorbis-populate"
+	}
+}

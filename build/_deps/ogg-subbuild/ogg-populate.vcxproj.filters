@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\4aa727ec972ad226af39386eb22eb7b2\ogg-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\4aa727ec972ad226af39386eb22eb7b2\ogg-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\4aa727ec972ad226af39386eb22eb7b2\ogg-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\4aa727ec972ad226af39386eb22eb7b2\ogg-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\4aa727ec972ad226af39386eb22eb7b2\ogg-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\4aa727ec972ad226af39386eb22eb7b2\ogg-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\4aa727ec972ad226af39386eb22eb7b2\ogg-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\4aa727ec972ad226af39386eb22eb7b2\ogg-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\13613518b237fbc1ba8c0eb80748e42a\ogg-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\7ded913ed51417bdea3835e4db214e8a\ogg-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\ogg-subbuild\CMakeFiles\ogg-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{5297DC2B-2E11-3096-9447-71DF67968684}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

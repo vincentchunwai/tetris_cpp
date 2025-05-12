@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/ogg-populate"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/7ded913ed51417bdea3835e4db214e8a/ogg-populate.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/13613518b237fbc1ba8c0eb80748e42a/ogg-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"ogg-populate"
+		],
+		"name" : "ogg-populate"
+	}
+}

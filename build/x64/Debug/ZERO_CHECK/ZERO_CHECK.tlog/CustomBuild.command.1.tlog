@@ -1,0 +1,10 @@
+^C:\USERS\CHEUN\GITDEV\TETRIS_CPP\BUILD\CMAKEFILES\FF8BABAA19899E35CD94AAC7AA404AE8\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/cheun/GitDev/tetris_cpp -BC:/Users/cheun/GitDev/tetris_cpp/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/cheun/GitDev/tetris_cpp/build/CMakeSFMLProject.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

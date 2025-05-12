@@ -1,0 +1,10 @@
+^C:\USERS\CHEUN\GITDEV\TETRIS_CPP\BUILD\_DEPS\VORBIS-SUBBUILD\CMAKEFILES\9C33AD05075A4BF88776CDEA96029543\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild -BC:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/vorbis-populate.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

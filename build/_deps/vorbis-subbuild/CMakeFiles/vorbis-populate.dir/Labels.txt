@@ -1,0 +1,14 @@
+# Target labels
+ vorbis-populate
+# Source files and their labels
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/vorbis-populate
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/9c33ad05075a4bf88776cdea96029543/vorbis-populate.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/4d246e84e713213b0508987ddd6b401a/vorbis-populate-complete.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-build.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-configure.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-download.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-install.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-mkdir.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-patch.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-test.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/vorbis-subbuild/CMakeFiles/d60e54da9a90bcb260bdceb29589a422/vorbis-populate-update.rule

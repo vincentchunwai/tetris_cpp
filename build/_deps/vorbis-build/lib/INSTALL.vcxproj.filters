@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\CMakeFiles\5a68fb2e2b12d3c273a2e8adb31cbc03\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{61C249BB-38AA-3E29-BC02-FF89074251E7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

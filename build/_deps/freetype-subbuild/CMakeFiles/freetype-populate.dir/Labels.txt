@@ -1,0 +1,14 @@
+# Target labels
+ freetype-populate
+# Source files and their labels
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/freetype-populate
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/04b41a86af9bcbef1fc2690c0ef45d24/freetype-populate.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/ba41996aba9209382083dd276381663d/freetype-populate-complete.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/9f2072f4a71d4d94f07bc359bf700cbc/freetype-populate-build.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/9f2072f4a71d4d94f07bc359bf700cbc/freetype-populate-configure.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/9f2072f4a71d4d94f07bc359bf700cbc/freetype-populate-download.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/9f2072f4a71d4d94f07bc359bf700cbc/freetype-populate-install.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/9f2072f4a71d4d94f07bc359bf700cbc/freetype-populate-mkdir.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/9f2072f4a71d4d94f07bc359bf700cbc/freetype-populate-patch.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/9f2072f4a71d4d94f07bc359bf700cbc/freetype-populate-test.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/freetype-subbuild/CMakeFiles/9f2072f4a71d4d94f07bc359bf700cbc/freetype-populate-update.rule

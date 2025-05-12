@@ -1,0 +1,5 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCSourceCompiles.cmake
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-src/cmake/CheckA64NEON.cmake
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-src/cmake/CheckCPUArch.cmake
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-src/src/libFLAC/CMakeLists.txt

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/flac-populate"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/313259b4b74b77bb0e9fde8487259462/flac-populate.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/ea1683f913df0c6d9911de538ba868ff/flac-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/40f6b37b53a943f85b7059d4c64a6662/flac-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/40f6b37b53a943f85b7059d4c64a6662/flac-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/40f6b37b53a943f85b7059d4c64a6662/flac-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/40f6b37b53a943f85b7059d4c64a6662/flac-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/40f6b37b53a943f85b7059d4c64a6662/flac-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/40f6b37b53a943f85b7059d4c64a6662/flac-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/40f6b37b53a943f85b7059d4c64a6662/flac-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/cheun/GitDev/tetris_cpp/build/_deps/flac-subbuild/CMakeFiles/40f6b37b53a943f85b7059d4c64a6662/flac-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"flac-populate"
+		],
+		"name" : "flac-populate"
+	}
+}

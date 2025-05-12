@@ -1,0 +1,10 @@
+^C:\USERS\CHEUN\GITDEV\TETRIS_CPP\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\4A412BBB6BE3E1228C5C5020A5A64BD2\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/cheun/GitDev/tetris_cpp/build/_deps/sfml-subbuild -BC:/Users/cheun/GitDev/tetris_cpp/build/_deps/sfml-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/cheun/GitDev/tetris_cpp/build/_deps/sfml-subbuild/sfml-populate.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

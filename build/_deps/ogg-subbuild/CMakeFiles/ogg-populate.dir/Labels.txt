@@ -1,0 +1,14 @@
+# Target labels
+ ogg-populate
+# Source files and their labels
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/ogg-populate
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/7ded913ed51417bdea3835e4db214e8a/ogg-populate.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/13613518b237fbc1ba8c0eb80748e42a/ogg-populate-complete.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-build.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-configure.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-download.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-install.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-mkdir.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-patch.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-test.rule
+C:/Users/cheun/GitDev/tetris_cpp/build/_deps/ogg-subbuild/CMakeFiles/4aa727ec972ad226af39386eb22eb7b2/ogg-populate-update.rule

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\d60e54da9a90bcb260bdceb29589a422\vorbis-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\d60e54da9a90bcb260bdceb29589a422\vorbis-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\d60e54da9a90bcb260bdceb29589a422\vorbis-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\d60e54da9a90bcb260bdceb29589a422\vorbis-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\d60e54da9a90bcb260bdceb29589a422\vorbis-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\d60e54da9a90bcb260bdceb29589a422\vorbis-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\d60e54da9a90bcb260bdceb29589a422\vorbis-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\d60e54da9a90bcb260bdceb29589a422\vorbis-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\4d246e84e713213b0508987ddd6b401a\vorbis-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\9c33ad05075a4bf88776cdea96029543\vorbis-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\cheun\GitDev\tetris_cpp\build\_deps\vorbis-subbuild\CMakeFiles\vorbis-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{64E53C80-2CDB-3736-B2CE-B96428597A45}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
