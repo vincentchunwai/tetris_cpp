@@ -377,6 +377,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\cheun\GitDev\tetris_cpp\src\main.cpp" />
+    <ClCompile Include="C:\Users\cheun\GitDev\tetris_cpp\src\tetrisTypes.cpp" />
+    <ClCompile Include="C:\Users\cheun\GitDev\tetris_cpp\src\tetrisPieces.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

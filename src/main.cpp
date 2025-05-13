@@ -1,52 +1,25 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include "tetrisPieces.h"
+#include "tetrisTypes.h"
 
 int main()
 {
-    auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "Tetris SFML");
+    auto window = sf::RenderWindow(sf::VideoMode({900, 1080u}), "Tetris SFML");
     window.setFramerateLimit(144);
 
-    // Load palette image containing all the colors
-    sf::Image palette;
-    if (!palette.loadFromFile("assets/yukulel_minos.png")) {
-        std::cerr << "Failed to load palette image" << std::endl;
-        return -1;
-    }
+    std::vector<sf::Texture> textures;
+    initializeTextures(textures);
 
-    int numBlocks = 12;
-    int blockWidth = palette.getSize().x / numBlocks;
-    int blockHeight = palette.getSize().y;
+    TetrisPiece tetrisPieceT (300, 150, TetrisTypes::T);
+    TetrisPiece tetrisPieceI (400, 150, TetrisTypes::I);
+    TetrisPiece tetrisPieceJ (600, 150, TetrisTypes::J);
+    TetrisPiece tetrisPieceL (700, 150, TetrisTypes::L);
+    TetrisPiece tetrisPieceO (800, 150, TetrisTypes::O);
+    TetrisPiece tetrisPieceS (100, 150, TetrisTypes::S);
+    TetrisPiece tetrisPieceZ (200, 150, TetrisTypes::Z);
 
-    std::vector<sf::IntRect> textureRects;
-    for (int i = 0; i < numBlocks; ++i) {
-        textureRects.push_back(sf::IntRect({i * blockWidth, 0}, {blockWidth, blockHeight}));
-    }
-
-    std::vector<sf::Texture> blockTextures;
-    for (const sf::IntRect& rect: textureRects) {
-        sf::Texture texture;
-        if (!texture.loadFromImage(palette, true, rect)) {
-            std::cerr << "Failed to load texture from palette" << std::endl;
-            return -1;
-        }
-        blockTextures.push_back(texture);
-    }
-
-    sf::Texture& tetrisTexture = blockTextures[0];
-
-    int displayBlockSize = 50;
-
-    sf::Vector2f basePosition(300.f, 150.f);
-
-    std::vector<sf::Sprite> tetrisPieces;
-    for (int i = 0; i < 3; ++i) {
-        sf::Sprite sprite(tetrisTexture);
-        sprite.setPosition(sf::Vector2f(basePosition.x + i * displayBlockSize, basePosition.y));
-        tetrisPieces.push_back(sprite);
-    }
-
-    
 
     while (window.isOpen())
     {
@@ -59,9 +32,18 @@ int main()
         }
 
         window.clear();
-        for (const auto& block : tetrisPieces) {
-            window.draw(block);
-        }
+        // for (const auto& block : tetrisPieces) {
+        //     window.draw(block);
+        // }
+
+        tetrisPieceT.render(window, textures, TetrisColors::GREEN);
+        tetrisPieceI.render(window, textures, TetrisColors::RED);
+        tetrisPieceJ.render(window, textures, TetrisColors::BLUE);
+        tetrisPieceL.render(window, textures, TetrisColors::PURPLE);
+        tetrisPieceO.render(window, textures, TetrisColors::YELLOW);
+        tetrisPieceS.render(window, textures, TetrisColors::ORANGE);
+        tetrisPieceZ.render(window, textures, TetrisColors::GREY);
+
         
         window.display();
     }
