@@ -2,8 +2,8 @@
 #include <iostream>
 
 // Constructor with default values
-TetrisPiece::TetrisPiece(int x, int y, TetrisTypes t) 
-    : x_coord(x), y_coord(y), type(t) {}
+TetrisPiece::TetrisPiece(int x, int y, TetrisTypes t, TetrisColors c) 
+    : x_coord(x), y_coord(y), type(t), color(c) {}
 
 // Render Tetris piece
 void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& textures, TetrisColors color) {
@@ -105,7 +105,8 @@ void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& tex
             break;
         }
         
-    }            for (const auto& block: tetrisPieces) {
+    }            
+    for (const auto& block: tetrisPieces) {
         window.draw(block);
     }
 }

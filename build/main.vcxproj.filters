@@ -10,6 +10,9 @@
     <ClCompile Include="C:\Users\cheun\GitDev\tetris_cpp\src\tetrisPieces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\cheun\GitDev\tetris_cpp\src\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\cheun\GitDev\tetris_cpp\CMakeLists.txt" />
