@@ -9,7 +9,9 @@ public:
     // Public member variables
     int x_coord;                  // X-coordinate of the piece
     int y_coord;                  // Y-coordinate of the piece
-    const int displayBlockSize = 30; // Size of each block in pixels
+    static const int DISPLAY_BLOCK_WIDTH = 31;
+    static const int DISPLAY_BLOCK_HEIGHT = 30;
+    //const int displayBlockSize = 30; // Size of each block in pixels
     TetrisTypes type;             // The type of the Tetris piece (enum)
     TetrisColors color;
 

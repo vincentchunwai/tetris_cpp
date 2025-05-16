@@ -14,7 +14,7 @@ void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& tex
         case TetrisTypes::I : {
             for (int i = 0; i < 4; ++i) {
                 sf::Sprite sprite(tetrisTexture);
-                sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord));
+                sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord));
                 tetrisPieces.push_back(sprite);
             }
             break;
@@ -22,11 +22,11 @@ void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& tex
         case TetrisTypes::J : {
             for (int i = 0; i < 3; ++i) {
                 sf::Sprite sprite(tetrisTexture);
-                sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord));
+                sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord));
                 tetrisPieces.push_back(sprite);
                 if (i == 2) {
                     sf::Sprite sprite(tetrisTexture);
-                    sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord + displayBlockSize));
+                    sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord + DISPLAY_BLOCK_WIDTH));
                     tetrisPieces.push_back(sprite);
                 }
             }
@@ -35,11 +35,11 @@ void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& tex
         case TetrisTypes::L : {
             for (int i = 0; i < 3; ++i) {
                 sf::Sprite sprite(tetrisTexture);
-                sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord));
+                sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord));
                 tetrisPieces.push_back(sprite);
                 if (i == 2) {
                     sf::Sprite sprite(tetrisTexture);
-                    sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord - displayBlockSize));
+                    sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord - DISPLAY_BLOCK_WIDTH));
                     tetrisPieces.push_back(sprite);
                 }
             }
@@ -49,7 +49,7 @@ void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& tex
             for (int i = 0; i < 2; ++i) {
                 for (int j = 0; j < 2; ++j) {
                     sf::Sprite sprite(tetrisTexture);
-                    sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord + j * displayBlockSize));
+                    sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord + j * DISPLAY_BLOCK_WIDTH));
                     tetrisPieces.push_back(sprite);
                 }
             }
@@ -60,11 +60,11 @@ void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& tex
                 for (int j = 0; j < 2; ++j) {
                     sf::Sprite sprite(tetrisTexture);
                     if (j == 1 && i == 0) {
-                        sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord + j * displayBlockSize));
+                        sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord + j * DISPLAY_BLOCK_WIDTH));
                     } else if (j == 1 && i == 1) {
-                        sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord - j * displayBlockSize));
+                        sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord - j * DISPLAY_BLOCK_WIDTH));
                     } else {
-                        sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord));
+                        sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord));
                     }
                     tetrisPieces.push_back(sprite);
                 }
@@ -74,13 +74,13 @@ void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& tex
         case TetrisTypes::T : {
             for (int i = 0; i < 3; ++i) {
                 sf::Sprite sprite(tetrisTexture);
-                sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord));
+                sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord));
                 tetrisPieces.push_back(sprite);
                 if (i == 1) {
                     // Add blocks below the middle position (j+1 to start at row below the top)
                     for (int j = 0; j < 2; ++j) {
                         sf::Sprite sprite(tetrisTexture);
-                        sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord + (j+1) * displayBlockSize));
+                        sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord + (j+1) * DISPLAY_BLOCK_WIDTH));
                         tetrisPieces.push_back(sprite);
                     }
                 }
@@ -93,11 +93,11 @@ void TetrisPiece::render(sf::RenderWindow& window, std::vector<sf::Texture>& tex
                 for (int j = 0; j < 2; ++j) {
                     sf::Sprite sprite(tetrisTexture);
                     if (j == 1 && i == 0) {
-                        sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord - j * displayBlockSize));
+                        sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord - j * DISPLAY_BLOCK_WIDTH));
                     } else if (j == 1 && i == 1) {
-                        sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord + j * displayBlockSize));
+                        sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord + j * DISPLAY_BLOCK_WIDTH));
                     } else {
-                        sprite.setPosition(sf::Vector2f(x_coord + i * displayBlockSize, y_coord));
+                        sprite.setPosition(sf::Vector2f(x_coord + i * DISPLAY_BLOCK_WIDTH, y_coord));
                     }
                     tetrisPieces.push_back(sprite);
                 }

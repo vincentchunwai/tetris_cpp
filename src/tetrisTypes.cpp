@@ -16,6 +16,9 @@ void initializeTextures(std::vector<sf::Texture>& textures) {
         texturesRects.push_back(sf::IntRect({i * blockWidth, 0}, {blockWidth, blockHeight}));
     }
 
+    std::cout << "blockWidth: " << blockWidth << std::endl;
+    std::cout << "blockHeight: " << blockHeight << std::endl;
+
     for(const sf::IntRect& rect: texturesRects) {
         sf::Texture texture;
         if (!texture.loadFromImage(palette, true, rect)) {
