@@ -1,9 +1,13 @@
 #ifndef TETRISPIECES_H
 #define TETRISPIECES_H
 #include "tetrisTypes.h"
+#include "game.h"
 #include "SFML/Graphics.hpp"
 #include <vector>
 #include <utility>
+#include <array>
+
+using namespace std;
 
 class TetrisPiece {
 public:
@@ -16,6 +20,7 @@ public:
     TetrisTypes type;             // The type of the Tetris piece (enum)
     TetrisColors color;
     int spinState = 0;
+    array<pair<int, int>, 4> blockPositions;
 
     TetrisPiece& operator=(const TetrisPiece& other){
         if (this != &other) {
@@ -23,17 +28,24 @@ public:
             y_coord = other.y_coord;
             type = other.type;
             color = other.color;
+            blockPositions = other.blockPositions;
         }
         return *this;
     }
 
-    // Constructor with default values
-    TetrisPiece(int x = 0, int y = 0, TetrisTypes t = TetrisTypes::I, TetrisColors c = TetrisColors::RED);
+    void updatePosition();
 
+    // Constructor with default values
+    TetrisPiece(int x = 0, int y = 0, TetrisTypes t = TetrisTypes::I, TetrisColors c = TetrisColors::RED, 
+                array<pair<int, int>, 4> pos = {{{0, 0}, {0, 0}, {0, 0}, {0, 0}}});
+
+    void adjustPosition(int screenWidth, int screenHeight);
     
-    std::array<std::pair<int, int>, 4> render(sf::RenderWindow& window, std::vector<sf::Texture>& textures, TetrisColors color);
+    array<pair<int, int>, 4> render(sf::RenderWindow& window, vector<sf::Texture>& textures, TetrisColors color);
 
     static int getMaxX(TetrisTypes type, int blockWidth, int windowWidth) ;
+
+    vector<pair<int, int>> getBottomSurfaceBlocks();
 
 };
 
