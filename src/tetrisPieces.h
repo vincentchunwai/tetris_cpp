@@ -3,6 +3,7 @@
 #include "tetrisTypes.h"
 #include "SFML/Graphics.hpp"
 #include <vector>
+#include <utility>
 
 class TetrisPiece {
 public:
@@ -14,6 +15,7 @@ public:
     //const int displayBlockSize = 30; // Size of each block in pixels
     TetrisTypes type;             // The type of the Tetris piece (enum)
     TetrisColors color;
+    int spinState = 0;
 
     TetrisPiece& operator=(const TetrisPiece& other){
         if (this != &other) {
@@ -29,8 +31,9 @@ public:
     TetrisPiece(int x = 0, int y = 0, TetrisTypes t = TetrisTypes::I, TetrisColors c = TetrisColors::RED);
 
     
-    void render(sf::RenderWindow& window, std::vector<sf::Texture>& textures, TetrisColors color);
+    std::array<std::pair<int, int>, 4> render(sf::RenderWindow& window, std::vector<sf::Texture>& textures, TetrisColors color);
 
+    static int getMaxX(TetrisTypes type, int blockWidth, int windowWidth) ;
 
 };
 

@@ -9,45 +9,6 @@
 Game::Game() {
 }
 
-int getMaxX(TetrisTypes type, int blockWidth, int windowWidth) {
-    // Calculate the furthest right position a piece can be placed
-    // such that it's still fully visible on screen
-    
-    // How many blocks from the left edge to the rightmost block
-    int blocksFromLeftToRight = 0;
-    
-    switch(type) {
-        case TetrisTypes::I:
-            // I piece is 4 blocks wide
-            blocksFromLeftToRight = 3; // 0,1,2,3 (4 blocks total, rightmost is at index 3)
-            break;
-        case TetrisTypes::O:
-            // O piece is 2 blocks wide
-            blocksFromLeftToRight = 1; // 0,1 (2 blocks total, rightmost is at index 1)
-            break;
-        case TetrisTypes::T:
-            // T piece is 3 blocks wide
-            blocksFromLeftToRight = 2; // 0,1,2 (3 blocks total, rightmost is at index 2)
-            break;
-        case TetrisTypes::S:
-        case TetrisTypes::Z:
-            // S and Z pieces are 3 blocks wide
-            blocksFromLeftToRight = 1; // 0,1,2 (3 blocks total, rightmost is at index 2)
-            break;
-        case TetrisTypes::J:
-        case TetrisTypes::L:
-            // J and L pieces are 3 blocks wide
-            blocksFromLeftToRight = 2; // 0,1,2 (3 blocks total, rightmost is at index 2)
-            break;
-        default:
-            blocksFromLeftToRight = 2;
-            break;
-    }
-    
-    // Return the maximum x-coordinate of the leftmost block
-    // such that the rightmost block is still on screen
-    return windowWidth - (blocksFromLeftToRight * blockWidth) - blockWidth;
-}
 
 void Game::run(sf::RenderWindow& window) {
     std::vector<sf::Texture> textures;
@@ -67,7 +28,7 @@ void Game::run(sf::RenderWindow& window) {
     std::vector<TetrisPiece> bottomTetris;    
     TetrisTypes randomType = static_cast<TetrisTypes>(dist(gen));
     
-    int maxX = getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
+    int maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
     std::uniform_int_distribution<int> dist3(0, maxX / BLOCK_WIDTH); // x-coordinates
     int currentX = dist3(gen) * BLOCK_WIDTH;
     int currentY = 0;
@@ -125,7 +86,7 @@ void Game::run(sf::RenderWindow& window) {
                         currentX = currentPiece.x_coord;
                     } 
                 } else if (keyPressed->scancode == sf::Keyboard::Scancode::Right) {
-                    int maxX = getMaxX(currentPiece.type, BLOCK_WIDTH, WINDOW_WIDTH);
+                    int maxX = TetrisPiece::getMaxX(currentPiece.type, BLOCK_WIDTH, WINDOW_WIDTH);
                     if (currentPiece.x_coord + BLOCK_WIDTH <= maxX) {
                         currentPiece.x_coord += BLOCK_WIDTH;
                         currentX = currentPiece.x_coord;
@@ -140,6 +101,10 @@ void Game::run(sf::RenderWindow& window) {
                         currentY += BLOCK_HEIGHT;
                     }
                     currentPiece.y_coord = currentY;
+                } else if (keyPressed->scancode == sf::Keyboard::Scancode::Tab) {
+                    // Rotate piece
+                    currentPiece.spinState = (currentPiece.spinState + 1) % 4;
+                    
                 }
             }
         }
@@ -159,7 +124,7 @@ void Game::run(sf::RenderWindow& window) {
                 // Create a new piece
                 randomType = static_cast<TetrisTypes>(dist(gen));
 
-                maxX = getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
+                maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
 
                 std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
 
