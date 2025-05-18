@@ -16,7 +16,7 @@ bool Game::checkSideCollision(const TetrisPiece& piece, int direction) {
     TetrisPiece testPiece = piece;
     testPiece.x_coord += direction * BLOCK_WIDTH;
 
-    // 2) Recompute its blockPositions (no drawing!)
+    // 2) Recompute its blockPositions
     testPiece.updatePosition();
 
     // 3) Test against the left and right walls
@@ -28,28 +28,23 @@ bool Game::checkSideCollision(const TetrisPiece& piece, int direction) {
 
     // 4) Test overlap with already-occupied cells
     for (auto& b : testPiece.blockPositions) {
-        for (auto& o : occupiedBlocks) {
-            if (b == o)
-                return true;
-        }
+        if (std::find(occupiedBlocks.begin(),
+                    occupiedBlocks.end(), b)
+          != occupiedBlocks.end())
+          return true;
     }
 
     return false;
 }
 
 bool Game::checkCollision(TetrisPiece& piece) {
-    vector<pair<int, int>> bottomSurfaces = piece.getBottomSurfaceBlocks();
+    piece.updatePosition();
 
-    for (const auto& bottomBlock : bottomSurfaces) {
-        for (const auto& occupiedBlock : occupiedBlocks) {
-            // Check if the X-coordinates align
-            if (bottomBlock.first == occupiedBlock.first) {
-                // Check if this block would collide with an occupied block
-                // Add BLOCK_HEIGHT to check the position after moving down
-                if (bottomBlock.second + BLOCK_HEIGHT > occupiedBlock.second) {
-                    return true;
-                }
-            }
+    for (auto const& b: piece.blockPositions) {
+        if (std::find(occupiedBlocks.begin(), occupiedBlocks.end(), b)
+            != occupiedBlocks.end()) 
+        {
+            return true;
         }
     }
 
@@ -154,37 +149,6 @@ void Game::run(sf::RenderWindow& window) {
     sf::Clock clock;
     float dropTime = 1.0f;
 
-    int pieceHeight = 0;
-    int pieceWidth = 0;
-
-    switch(randomType) {
-        case TetrisTypes::I:
-            pieceHeight = PIECE_SIZE;
-            pieceWidth = BLOCK_WIDTH * 4;
-            break;
-        case TetrisTypes::O:
-            pieceHeight = PIECE_SIZE * 2;
-            pieceWidth = BLOCK_WIDTH * 2;
-            break;
-        case TetrisTypes::T:
-            pieceHeight = BLOCK_HEIGHT * 2;
-            pieceWidth = BLOCK_WIDTH * 2;
-            break;
-        case TetrisTypes::J:
-        case TetrisTypes::S:
-        case TetrisTypes::Z:
-            pieceHeight = BLOCK_HEIGHT * 2;
-            pieceWidth = BLOCK_WIDTH * 3;
-            break;
-        case TetrisTypes::L:
-            pieceHeight = BLOCK_HEIGHT;
-            pieceWidth = BLOCK_WIDTH * 2;
-            break;
-        default:
-            pieceHeight = BLOCK_HEIGHT * 2;
-            pieceWidth = BLOCK_WIDTH * 2;
-            break;
-    }
     while(window.isOpen()) {
         while(const std::optional event = window.pollEvent()){
             if (event->is<sf::Event::Closed>()){

@@ -50,7 +50,7 @@ std::array<std::pair<int, int>, 4> TetrisPiece::render(sf::RenderWindow& window,
 
                     break;
             }
-            adjustPosition(window.getSize().x , Game::GAME_BOTTOM);
+            adjustPosition(Game::WINDOW_WIDTH, Game::GAME_BOTTOM);
             addBlocks(blockPositions, tetrisPieces, tetrisTexture);
             break;
         }
@@ -108,7 +108,7 @@ std::array<std::pair<int, int>, 4> TetrisPiece::render(sf::RenderWindow& window,
                     break;
 
             }
-            adjustPosition(window.getSize().x , Game::GAME_BOTTOM);
+            adjustPosition(Game::WINDOW_WIDTH, Game::GAME_BOTTOM);
             addBlocks(blockPositions, tetrisPieces, tetrisTexture);
             break;
         }
@@ -164,7 +164,7 @@ std::array<std::pair<int, int>, 4> TetrisPiece::render(sf::RenderWindow& window,
                         }
                     };
             }
-            adjustPosition(window.getSize().x , Game::GAME_BOTTOM);
+            adjustPosition(Game::WINDOW_WIDTH, Game::GAME_BOTTOM);
             addBlocks(blockPositions, tetrisPieces, tetrisTexture);
             break;
         }
@@ -186,7 +186,7 @@ std::array<std::pair<int, int>, 4> TetrisPiece::render(sf::RenderWindow& window,
                     };
                     break;
             }
-            adjustPosition(window.getSize().x , Game::GAME_BOTTOM);
+            adjustPosition(Game::WINDOW_WIDTH, Game::GAME_BOTTOM);
             addBlocks(blockPositions, tetrisPieces, tetrisTexture);
             break;
         }
@@ -219,7 +219,7 @@ std::array<std::pair<int, int>, 4> TetrisPiece::render(sf::RenderWindow& window,
                         }
                     };
             }
-            adjustPosition(window.getSize().x , Game::GAME_BOTTOM);
+            adjustPosition(Game::WINDOW_WIDTH, Game::GAME_BOTTOM);
             addBlocks(blockPositions, tetrisPieces, tetrisTexture);
             break;
         }
@@ -277,7 +277,7 @@ std::array<std::pair<int, int>, 4> TetrisPiece::render(sf::RenderWindow& window,
                         }
                     };
             }
-            adjustPosition(window.getSize().x , Game::GAME_BOTTOM);
+            adjustPosition(Game::WINDOW_WIDTH, Game::GAME_BOTTOM);
             addBlocks(blockPositions, tetrisPieces, tetrisTexture);
             break;
         }
@@ -310,7 +310,7 @@ std::array<std::pair<int, int>, 4> TetrisPiece::render(sf::RenderWindow& window,
                         }
                     };
             }
-            adjustPosition(window.getSize().x , Game::GAME_BOTTOM);
+            adjustPosition(Game::WINDOW_WIDTH, Game::GAME_BOTTOM);
             addBlocks(blockPositions, tetrisPieces, tetrisTexture);
             break;
         }
@@ -373,8 +373,8 @@ void TetrisPiece::adjustPosition(int screenWidth, int screenHeight) {
     }
 
     // Check right boundary
-    if (maxX >= screenWidth) {
-        adjustX = screenWidth - maxX - 1;
+    if (maxX + DISPLAY_BLOCK_WIDTH > screenWidth) {
+        adjustX = screenWidth - (maxX + DISPLAY_BLOCK_WIDTH);
     }
 
     if (maxY >= screenHeight) {

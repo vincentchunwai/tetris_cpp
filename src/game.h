@@ -10,7 +10,7 @@ using namespace std;
 class TetrisPiece;
 class Game {
     public:
-        const static int WINDOW_WIDTH = 960;
+        const static int WINDOW_WIDTH = 930;
         const static int WINDOW_HEIGHT = 1080;
         const static int GAME_BOTTOM = WINDOW_HEIGHT - 30;
         const static int PIECE_SIZE = 30;
