@@ -10,7 +10,7 @@ using namespace std;
 class TetrisPiece;
 class Game {
     public:
-        const static int WINDOW_WIDTH = 930;
+        const static int WINDOW_WIDTH = 465;
         const static int WINDOW_HEIGHT = 1080;
         const static int GAME_BOTTOM = WINDOW_HEIGHT - 30;
         const static int PIECE_SIZE = 30;
@@ -30,9 +30,11 @@ class Game {
 
         int getHighestOccupiedYGivenX(vector<pair<int, int>> bottomSurfaceBlocks);
 
-        bool checkCollision(TetrisPiece& piece);
+        bool checkCollision(const TetrisPiece& piece);
 
         bool checkSideCollision(const TetrisPiece& piece, int direction);
+
+        bool Game::isValidPosition(const TetrisPiece& piece);
 };
 
 

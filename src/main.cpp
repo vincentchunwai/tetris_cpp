@@ -8,7 +8,7 @@
 int main()
 {   
 
-    auto window = sf::RenderWindow(sf::VideoMode({930, 1080u}), "Tetris SFML");
+    auto window = sf::RenderWindow(sf::VideoMode({465, 1080u}), "Tetris SFML");
     window.setFramerateLimit(144);
 
     Game game;

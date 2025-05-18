@@ -11,6 +11,27 @@
 Game::Game() {
 }
 
+bool Game::isValidPosition(const TetrisPiece& piece) {
+    TetrisPiece test = piece;
+    test.updatePosition();
+
+    auto [lX, lY] = getLeftMostBlockPosition(test.blockPositions);
+    auto [rX, rY] = getRightMostBlockPosition(test.blockPositions);
+
+    if (lX < 0 || rX + BLOCK_WIDTH > WINDOW_WIDTH) 
+        return false;
+    
+    for (auto const& b: test.blockPositions) {
+        if (std::find(occupiedBlocks.begin(),
+                        occupiedBlocks.end(), b)
+            != occupiedBlocks.end())
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool Game::checkSideCollision(const TetrisPiece& piece, int direction) {
     // 1) Make a moved copy
     TetrisPiece testPiece = piece;
@@ -37,8 +58,7 @@ bool Game::checkSideCollision(const TetrisPiece& piece, int direction) {
     return false;
 }
 
-bool Game::checkCollision(TetrisPiece& piece) {
-    piece.updatePosition();
+bool Game::checkCollision(const TetrisPiece& piece) {
 
     for (auto const& b: piece.blockPositions) {
         if (std::find(occupiedBlocks.begin(), occupiedBlocks.end(), b)
@@ -156,7 +176,7 @@ void Game::run(sf::RenderWindow& window) {
             }
             // Keyboard input to move the piece
             else if (const auto& keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Left){
+                if (keyPressed->code == sf::Keyboard::Key::Left){
                     currentPiece.render(window, textures, currentPiece.color);
     
                     // Check for left boundary and collisions
@@ -164,7 +184,7 @@ void Game::run(sf::RenderWindow& window) {
                         currentPiece.x_coord -= BLOCK_WIDTH;
                         currentX = currentPiece.x_coord;
                     }
-                } else if (keyPressed->scancode == sf::Keyboard::Scancode::Right) {
+                } else if (keyPressed->code == sf::Keyboard::Key::Right) {
                     currentPiece.render(window, textures, currentPiece.color);
                     
                     // Check for right boundary and collisions
@@ -173,7 +193,7 @@ void Game::run(sf::RenderWindow& window) {
                         currentX = currentPiece.x_coord;
                     }
 
-                } else if (keyPressed->scancode == sf::Keyboard::Scancode::Down) {
+                } else if (keyPressed->code == sf::Keyboard::Key::Down) {
                     currentPiece.render(window, textures, currentPiece.color);
                     pair<int, int> bottomBlock = getBottomMostBlockPosition(currentPiece.blockPositions);
                     vector<pair<int, int>> bottomSurfaces = currentPiece.getBottomSurfaceBlocks();
@@ -222,26 +242,27 @@ void Game::run(sf::RenderWindow& window) {
                         }
                     }
 
-                } else if (keyPressed->scancode == sf::Keyboard::Scancode::Space) {
+                } else if (keyPressed->code == sf::Keyboard::Key::Space) {
                     // Hard drop
                     int oldSpin = currentPiece.spinState;
 
                     while(true) {
                         TetrisPiece testPiece = currentPiece;
-                        testPiece.y_coord += BLOCK_HEIGHT;
                         testPiece.spinState = oldSpin;
-                        testPiece.render(window, textures, testPiece.color);
+                        testPiece.y_coord += BLOCK_HEIGHT;
+                        // Recompute blockPositions
+                        testPiece.updatePosition();
 
+                        // hit floor?
                         auto [bx, by] = getBottomMostBlockPosition(testPiece.blockPositions);
-                        if (by + BLOCK_HEIGHT > GAME_BOTTOM) {
-                            break;
-                        }
+                        if (by + BLOCK_HEIGHT > GAME_BOTTOM)
+                        break;
 
-                        if (checkCollision(testPiece)) {
+                        // hit stack?
+                        if (!isValidPosition(testPiece))
                             break;
-                        }
 
-                        currentPiece = testPiece;
+                        currentPiece = std::move(testPiece);
                         currentY = currentPiece.y_coord;
                     }
 
@@ -258,10 +279,34 @@ void Game::run(sf::RenderWindow& window) {
                     currentPiece = TetrisPiece(currentX, currentY, randomType);
                     currentPiece.color = randomColor;
 
-                } else if (keyPressed->scancode == sf::Keyboard::Scancode::Tab) {
+                } else if (keyPressed->code == sf::Keyboard::Key::Tab) {
                     // Rotate piece
-                    currentPiece.spinState = (currentPiece.spinState + 1) % 4;
+                    //Check Collision
+                    TetrisPiece test = currentPiece;
+                    test.spinState = (currentPiece.spinState + 1) % 4;
                     
+                    test.updatePosition();
+                    test.adjustPosition(WINDOW_WIDTH, GAME_BOTTOM);
+                    
+                    auto lb= getLeftMostBlockPosition(test.blockPositions);
+                    auto rb = getRightMostBlockPosition(test.blockPositions);
+                    bool inBounds = (lb.first >= 0 && rb.first + BLOCK_WIDTH <= WINDOW_WIDTH);
+
+                    bool hitStack = false;
+                    for (auto const& b : test.blockPositions) {
+                        if (std::find(occupiedBlocks.begin(), occupiedBlocks.end(), b)
+                            != occupiedBlocks.end())
+                        {
+                            hitStack = true;
+                            break;
+                        }
+                    }
+
+                    if (inBounds && !hitStack) {
+                        currentPiece = std::move(test);
+                        currentPiece.updatePosition();
+                        //std::cout << "didn't hit anything" << std::endl;
+                    }
                 }
             }
         }
@@ -332,6 +377,7 @@ void Game::run(sf::RenderWindow& window) {
             p.render(window, textures, p.color);
         }
 
+        currentPiece.updatePosition();
         // Draw current piece
         currentPiece.render(window, textures, currentPiece.color);
 

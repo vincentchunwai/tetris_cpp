@@ -315,7 +315,7 @@ std::array<std::pair<int, int>, 4> TetrisPiece::render(sf::RenderWindow& window,
             break;
         }
         
-    }            
+    }           
     for (const auto& block: tetrisPieces) {
         window.draw(block);
     }
@@ -377,8 +377,8 @@ void TetrisPiece::adjustPosition(int screenWidth, int screenHeight) {
         adjustX = screenWidth - (maxX + DISPLAY_BLOCK_WIDTH);
     }
 
-    if (maxY >= screenHeight) {
-        adjustY = screenHeight - maxY - 1;
+    if (maxY + DISPLAY_BLOCK_HEIGHT > screenHeight) {
+        adjustY = screenHeight - (maxY + DISPLAY_BLOCK_HEIGHT);
     }
 
     if (adjustX != 0 || adjustY != 0) {
@@ -391,6 +391,7 @@ void TetrisPiece::adjustPosition(int screenWidth, int screenHeight) {
             block.second += adjustY;
         }
     }
+
 }
 int TetrisPiece::getMaxX(TetrisTypes type, int blockWidth, int windowWidth) {
     // Calculate the furthest right position a piece can be placed

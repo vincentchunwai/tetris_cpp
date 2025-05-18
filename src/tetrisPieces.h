@@ -26,6 +26,7 @@ public:
         if (this != &other) {
             x_coord = other.x_coord;
             y_coord = other.y_coord;
+            spinState = other.spinState;
             type = other.type;
             color = other.color;
             blockPositions = other.blockPositions;
