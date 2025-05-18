@@ -21,13 +21,15 @@ bool Game::isValidPosition(const TetrisPiece& piece) {
     if (lX < 0 || rX + BLOCK_WIDTH > WINDOW_WIDTH) 
         return false;
     
-    for (auto const& b: test.blockPositions) {
-        if (std::find(occupiedBlocks.begin(),
-                        occupiedBlocks.end(), b)
-            != occupiedBlocks.end())
-        {
+    for (auto const& b : test.blockPositions) {
+        auto it = std::find_if(
+            occupiedBlocks.begin(), occupiedBlocks.end(),
+            [&](auto const& oc){
+                return oc.x == b.first 
+                    && oc.y == b.second;
+            });
+        if (it != occupiedBlocks.end())
             return false;
-        }
     }
     return true;
 }
@@ -49,10 +51,15 @@ bool Game::checkSideCollision(const TetrisPiece& piece, int direction) {
 
     // 4) Test overlap with already-occupied cells
     for (auto& b : testPiece.blockPositions) {
-        if (std::find(occupiedBlocks.begin(),
-                    occupiedBlocks.end(), b)
-          != occupiedBlocks.end())
-          return true;
+        auto it = std::find_if(
+            occupiedBlocks.begin(), occupiedBlocks.end(),
+            [&](auto const& oc) {
+                return oc.x == b.first && oc.y == b.second;
+            }
+        );
+        if (it != occupiedBlocks.end()) {
+            return true;
+        }
     }
 
     return false;
@@ -60,10 +67,22 @@ bool Game::checkSideCollision(const TetrisPiece& piece, int direction) {
 
 bool Game::checkCollision(const TetrisPiece& piece) {
 
+    // for (auto const& b: piece.blockPositions) {
+    //     if (std::find(occupiedBlocks.begin(), occupiedBlocks.end(), b)
+    //         != occupiedBlocks.end()) 
+    //     {
+    //         return true;
+    //     }
+    // }
+
     for (auto const& b: piece.blockPositions) {
-        if (std::find(occupiedBlocks.begin(), occupiedBlocks.end(), b)
-            != occupiedBlocks.end()) 
-        {
+        auto it = std::find_if(
+            occupiedBlocks.begin(), occupiedBlocks.end(),
+            [&](auto const& oc) {
+                return oc.x == b.first && oc.y == b.second;
+            }
+        );
+        if (it != occupiedBlocks.end()) {
             return true;
         }
     }
@@ -85,8 +104,8 @@ int Game::getHighestOccupiedYGivenX(vector<pair<int, int>> bottomSurfaceBlocks) 
         // Find the highest occupied block at this X position
         int highestAtX = GAME_BOTTOM;
         for (const auto& occupiedBlock : occupiedBlocks) {
-            if (occupiedBlock.first == x && occupiedBlock.second < highestAtX) {
-                highestAtX = occupiedBlock.second;
+            if (occupiedBlock.x == x && occupiedBlock.y < highestAtX) {
+                highestAtX = occupiedBlock.y;
             }
         }
 
@@ -99,9 +118,9 @@ int Game::getHighestOccupiedYGivenX(vector<pair<int, int>> bottomSurfaceBlocks) 
     return highestOccupiedY;
 }
 
-void Game::addOccupiedBlocks(array<pair<int, int>, 4> blockPositions) {
-    for (const auto& block: blockPositions) {
-        occupiedBlocks.push_back(block);
+void Game::addOccupiedBlocks(array<pair<int,int>,4>& blockPositions, TetrisColors color) {
+    for (auto [x, y]: blockPositions) {
+        occupiedBlocks.push_back({x, y, color});
     }
 }
 
@@ -152,7 +171,7 @@ void Game::run(sf::RenderWindow& window) {
     std::uniform_int_distribution<int> dist2(1, 9); // 1 to 9 for Tetris Color
 
     // Store pieces that have reached the bottom
-    std::vector<TetrisPiece> bottomTetris;    
+    //std::vector<TetrisPiece> bottomTetris;    
     TetrisTypes randomType = static_cast<TetrisTypes>(dist(gen));
     
     int maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
@@ -200,29 +219,15 @@ void Game::run(sf::RenderWindow& window) {
 
 
                     if (bottomBlock.second + BLOCK_HEIGHT >= GAME_BOTTOM) {
-                        addOccupiedBlocks(currentPiece.blockPositions);
-                        bottomTetris.push_back(currentPiece);
+                        addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
+                        //bottomTetris.push_back(currentPiece);
                         
-                        // Create a new piece
-                        randomType = static_cast<TetrisTypes>(dist(gen));
-                        maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
-                        std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
-                        currentX = newDist3(gen) * BLOCK_WIDTH;
-                        currentY = 0;
-                        randomColor = static_cast<TetrisColors>(dist2(gen));
-                        currentPiece = TetrisPiece(currentX, currentY, randomType);
-                        currentPiece.color = randomColor;
-                    } else {
-                        // Create a test piece one position down
-                        TetrisPiece testPiece = currentPiece;
-                        testPiece.y_coord += BLOCK_HEIGHT;
-                        testPiece.render(window, textures, testPiece.color);
-
-                        if (checkCollision(testPiece)) {
-                            addOccupiedBlocks(currentPiece.blockPositions);
-                            bottomTetris.push_back(currentPiece);
-
-                            // Create a new piece when collision occurs
+                        clearRows = findFullLines();
+                        if (!clearRows.empty()) {
+                            isClearing = true;
+                            clearClock.restart();
+                        } else {
+                            // Create a new piece
                             randomType = static_cast<TetrisTypes>(dist(gen));
                             maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
                             std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
@@ -231,6 +236,32 @@ void Game::run(sf::RenderWindow& window) {
                             randomColor = static_cast<TetrisColors>(dist2(gen));
                             currentPiece = TetrisPiece(currentX, currentY, randomType);
                             currentPiece.color = randomColor;
+                        }
+                    } else {
+                        // Create a test piece one position down
+                        TetrisPiece testPiece = currentPiece;
+                        testPiece.y_coord += BLOCK_HEIGHT;
+                        testPiece.render(window, textures, testPiece.color);
+
+                        if (checkCollision(testPiece)) {
+                            addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
+                            //bottomTetris.push_back(currentPiece);
+
+                            clearRows = findFullLines();
+                            if (!clearRows.empty()) {
+                                isClearing = true;
+                                clearClock.restart();
+                            } else {
+                                // Create a new piece
+                                randomType = static_cast<TetrisTypes>(dist(gen));
+                                maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
+                                std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
+                                currentX = newDist3(gen) * BLOCK_WIDTH;
+                                currentY = 0;
+                                randomColor = static_cast<TetrisColors>(dist2(gen));
+                                currentPiece = TetrisPiece(currentX, currentY, randomType);
+                                currentPiece.color = randomColor;
+                            }
                         } else {
                             currentY += BLOCK_HEIGHT;
                             currentPiece.y_coord = currentY;
@@ -267,17 +298,26 @@ void Game::run(sf::RenderWindow& window) {
                     }
 
                     // lock in place
-                    addOccupiedBlocks(currentPiece.blockPositions);
-                    bottomTetris.push_back(currentPiece);
+                    addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
+                    //bottomTetris.push_back(currentPiece);
 
-                    randomType = static_cast<TetrisTypes>(dist(gen));
-                    maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
-                    std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
-                    currentX = newDist3(gen) * BLOCK_WIDTH;
-                    currentY = 0;
-                    randomColor = static_cast<TetrisColors>(dist2(gen));
-                    currentPiece = TetrisPiece(currentX, currentY, randomType);
-                    currentPiece.color = randomColor;
+
+                    clearRows = findFullLines();
+                    if (!clearRows.empty()) {
+                        isClearing = true;
+                        clearClock.restart();
+                    } else {
+                        // spawn next piece…
+                        randomType = static_cast<TetrisTypes>(dist(gen));
+                        maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
+                        std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
+                        currentX = newDist3(gen) * BLOCK_WIDTH;
+                        currentY = 0;
+                        randomColor = static_cast<TetrisColors>(dist2(gen));
+                        currentPiece = TetrisPiece(currentX, currentY, randomType);
+                        currentPiece.color = randomColor;
+                    }
+
 
                 } else if (keyPressed->code == sf::Keyboard::Key::Tab) {
                     // Rotate piece
@@ -294,9 +334,13 @@ void Game::run(sf::RenderWindow& window) {
 
                     bool hitStack = false;
                     for (auto const& b : test.blockPositions) {
-                        if (std::find(occupiedBlocks.begin(), occupiedBlocks.end(), b)
-                            != occupiedBlocks.end())
-                        {
+                        auto it = std::find_if(
+                            occupiedBlocks.begin(), occupiedBlocks.end(),
+                            [&](auto const& oc){
+                                return oc.x == b.first 
+                                    && oc.y == b.second;
+                            });
+                        if (it != occupiedBlocks.end()) {
                             hitStack = true;
                             break;
                         }
@@ -309,6 +353,34 @@ void Game::run(sf::RenderWindow& window) {
                     }
                 }
             }
+        }
+        // Check for clearing lines
+        if (isClearing) {
+            float t = clearClock.getElapsedTime().asSeconds();
+            bool blinkOn = fmod(t, blinkInterval*2) < blinkInterval;
+            if (t >= clearDuration) {
+                removeLines(clearRows);
+                isClearing = false;
+                // spawn next piece…
+                randomType = static_cast<TetrisTypes>(dist(gen));
+                maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
+                std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
+                currentX = newDist3(gen) * BLOCK_WIDTH;
+                currentY = 0;
+                randomColor = static_cast<TetrisColors>(dist2(gen));
+                currentPiece = TetrisPiece(currentX, currentY, randomType);
+                currentPiece.color = randomColor;
+            }
+            // draw scene with blinking cleared lines
+            window.clear();
+            for (auto& b : occupiedBlocks) {
+                bool onCleared = find(clearRows.begin(), clearRows.end(), b.y) != clearRows.end();
+                if (onCleared && ! blinkOn)
+                    continue;
+            }
+
+            window.display();
+            continue;
         }
 
         // Move piece down based on time
@@ -323,29 +395,15 @@ void Game::run(sf::RenderWindow& window) {
 
             
             if (bottomBlock.second + BLOCK_HEIGHT >= GAME_BOTTOM) {
-                addOccupiedBlocks(currentPiece.blockPositions);
-                bottomTetris.push_back(currentPiece);
-                
-                // Create a new piece
-                randomType = static_cast<TetrisTypes>(dist(gen));
-                maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
-                std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
-                currentX = newDist3(gen) * BLOCK_WIDTH;
-                currentY = 0;
-                randomColor = static_cast<TetrisColors>(dist2(gen));
-                currentPiece = TetrisPiece(currentX, currentY, randomType);
-                currentPiece.color = randomColor;
-            } else {
-                // Create a test piece one position down
-                TetrisPiece testPiece = currentPiece;
-                testPiece.y_coord += BLOCK_HEIGHT;
-                testPiece.render(window, textures, testPiece.color);
+                addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
+                //bottomTetris.push_back(currentPiece);
 
-                if (checkCollision(testPiece)) {
-                    addOccupiedBlocks(currentPiece.blockPositions);
-                    bottomTetris.push_back(currentPiece);
-
-                    // Create a new piece when collision occurs
+                clearRows = findFullLines();
+                if (!clearRows.empty()) {
+                    isClearing = true;
+                    clearClock.restart();
+                } else {
+                    // Create a new piece
                     randomType = static_cast<TetrisTypes>(dist(gen));
                     maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
                     std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
@@ -354,6 +412,34 @@ void Game::run(sf::RenderWindow& window) {
                     randomColor = static_cast<TetrisColors>(dist2(gen));
                     currentPiece = TetrisPiece(currentX, currentY, randomType);
                     currentPiece.color = randomColor;
+                }
+                
+            } else {
+                // Create a test piece one position down
+                TetrisPiece testPiece = currentPiece;
+                testPiece.y_coord += BLOCK_HEIGHT;
+                testPiece.render(window, textures, testPiece.color);
+
+                if (checkCollision(testPiece)) {
+                    addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
+                    //bottomTetris.push_back(currentPiece);
+
+                    // Create a new piece when collision occurs
+                    clearRows = findFullLines();
+                    if (!clearRows.empty()) {
+                        isClearing = true;
+                        clearClock.restart();
+                    } else {
+                        // Create a new piece
+                        randomType = static_cast<TetrisTypes>(dist(gen));
+                        maxX = TetrisPiece::getMaxX(randomType, BLOCK_WIDTH, WINDOW_WIDTH);
+                        std::uniform_int_distribution<int> newDist3(0, maxX / BLOCK_WIDTH);
+                        currentX = newDist3(gen) * BLOCK_WIDTH;
+                        currentY = 0;
+                        randomColor = static_cast<TetrisColors>(dist2(gen));
+                        currentPiece = TetrisPiece(currentX, currentY, randomType);
+                        currentPiece.color = randomColor;
+                    }
                 } else {
                     currentY += BLOCK_HEIGHT;
                     currentPiece.y_coord = currentY;
@@ -373,8 +459,13 @@ void Game::run(sf::RenderWindow& window) {
         bottomLine.setFillColor(sf::Color::Red);
         window.draw(bottomLine);
         // Draw bottom pieces
-        for (TetrisPiece p : bottomTetris) {
-            p.render(window, textures, p.color);
+        // for (TetrisPiece p : bottomTetris) {
+        //     p.render(window, textures, p.color);
+        // }
+        for (auto& cell : occupiedBlocks) {
+            sf::Sprite sprite(textures[static_cast<int>(cell.color)]);
+            sprite.setPosition(sf::Vector2f(cell.x, cell.y));
+            window.draw(sprite);
         }
 
         currentPiece.updatePosition();
@@ -386,4 +477,37 @@ void Game::run(sf::RenderWindow& window) {
     }
 
 
+}
+
+vector<int> Game::findFullLines() {
+    std::map<int, int> countAtY;
+    for (auto& b : occupiedBlocks)
+        countAtY[b.y]++;
+
+    vector<int> lines;
+    int cellsPerRow = WINDOW_WIDTH / BLOCK_WIDTH;
+    for (auto& [y, c] : countAtY) {
+        if (c >= cellsPerRow)
+            lines.push_back(y);
+    }
+    return lines;
+}
+
+void Game::removeLines(const vector<int>& rows){
+    set<int> rowSet(rows.begin(), rows.end());
+
+    // Remove blocks that are in the cleared rows
+    occupiedBlocks.erase(
+        std::remove_if(occupiedBlocks.begin(), occupiedBlocks.end(),
+            [&](auto& b){return rowSet.count(b.y) > 0;}),
+        occupiedBlocks.end() 
+    );
+
+    for (int clearedY : rows) {
+        for (auto& b : occupiedBlocks) {
+            if (b.y < clearedY) { // above the cleared line
+                b.y += BLOCK_HEIGHT; // drop down one row
+            }
+        }
+    }
 }

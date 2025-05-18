@@ -30,4 +30,5 @@ enum class TetrisColors {
     GREY = 9,
 };
 
+
 #endif // TETRISTYPES_H
