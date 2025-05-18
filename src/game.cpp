@@ -219,6 +219,7 @@ void Game::run(sf::RenderWindow& window) {
 
 
                     if (bottomBlock.second + BLOCK_HEIGHT >= GAME_BOTTOM) {
+                        currentPiece.updatePosition();
                         addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
                         //bottomTetris.push_back(currentPiece);
                         
@@ -244,6 +245,7 @@ void Game::run(sf::RenderWindow& window) {
                         testPiece.render(window, textures, testPiece.color);
 
                         if (checkCollision(testPiece)) {
+                            currentPiece.updatePosition();
                             addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
                             //bottomTetris.push_back(currentPiece);
 
@@ -298,6 +300,7 @@ void Game::run(sf::RenderWindow& window) {
                     }
 
                     // lock in place
+                    currentPiece.updatePosition();
                     addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
                     //bottomTetris.push_back(currentPiece);
 
@@ -357,7 +360,7 @@ void Game::run(sf::RenderWindow& window) {
         // Check for clearing lines
         if (isClearing) {
             float t = clearClock.getElapsedTime().asSeconds();
-            bool blinkOn = fmod(t, blinkInterval*2) < blinkInterval;
+            //bool blinkOn = fmod(t, blinkInterval*2) < blinkInterval;
             if (t >= clearDuration) {
                 removeLines(clearRows);
                 isClearing = false;
@@ -373,10 +376,22 @@ void Game::run(sf::RenderWindow& window) {
             }
             // draw scene with blinking cleared lines
             window.clear();
+
             for (auto& b : occupiedBlocks) {
-                bool onCleared = find(clearRows.begin(), clearRows.end(), b.y) != clearRows.end();
-                if (onCleared && ! blinkOn)
-                    continue;
+                int row = b.y / BLOCK_HEIGHT;
+                bool onCleared = find(clearRows.begin(), clearRows.end(), row) != clearRows.end();
+                if (onCleared){
+                    sf::Sprite sprite(textures[static_cast<int>(b.color)]);
+                    sprite.setPosition(sf::Vector2f(b.x, b.y));
+                    int alpha = static_cast<int>(255 * (1 - fmod(t, blinkInterval*2) / blinkInterval));
+                    sprite.setColor(sf::Color(0, 255, 0, alpha));
+                    window.draw(sprite);
+                    //continue;
+                } else {
+                    // sf::Sprite sprite(textures[static_cast<int>(b.color)]);
+                    // sprite.setPosition(sf::Vector2f(b.x, b.y));
+                    // window.draw(sprite);
+                }
             }
 
             window.display();
@@ -395,6 +410,7 @@ void Game::run(sf::RenderWindow& window) {
 
             
             if (bottomBlock.second + BLOCK_HEIGHT >= GAME_BOTTOM) {
+                currentPiece.updatePosition();
                 addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
                 //bottomTetris.push_back(currentPiece);
 
@@ -421,6 +437,7 @@ void Game::run(sf::RenderWindow& window) {
                 testPiece.render(window, textures, testPiece.color);
 
                 if (checkCollision(testPiece)) {
+                    currentPiece.updatePosition();
                     addOccupiedBlocks(currentPiece.blockPositions, currentPiece.color);
                     //bottomTetris.push_back(currentPiece);
 
@@ -479,35 +496,87 @@ void Game::run(sf::RenderWindow& window) {
 
 }
 
+// vector<int> Game::findFullLines() {
+//     std::map<int, int> countAtY;
+//     for (auto& b : occupiedBlocks)
+//         countAtY[b.y]++;
+
+//     vector<int> lines;
+//     int cellsPerRow = WINDOW_WIDTH / BLOCK_WIDTH;
+//     for (auto& [y, c] : countAtY) {
+//         if (c >= cellsPerRow)
+//             lines.push_back(y);
+//     }
+//     return lines;
+// }
+
+// void Game::removeLines(const vector<int>& rows){
+//     set<int> rowSet(rows.begin(), rows.end());
+
+//     // Remove blocks that are in the cleared rows
+//     occupiedBlocks.erase(
+//         std::remove_if(occupiedBlocks.begin(), occupiedBlocks.end(),
+//             [&](auto& b){return rowSet.count(b.y) > 0;}),
+//         occupiedBlocks.end() 
+//     );
+
+//     for (int clearedY : rows) {
+//         for (auto& b : occupiedBlocks) {
+//             if (b.y < clearedY) { // above the cleared line
+//                 b.y += BLOCK_HEIGHT; // drop down one row
+//             }
+//         }
+//     }
+// }
+
+
 vector<int> Game::findFullLines() {
-    std::map<int, int> countAtY;
-    for (auto& b : occupiedBlocks)
-        countAtY[b.y]++;
+    // how many cells fit across the playfield?
+    int cols = WINDOW_WIDTH / BLOCK_WIDTH;  // use BLOCK_HEIGHT == actual tile size
+    map<int,int> countAtRow;
+
+    for(auto& c : occupiedBlocks) {
+        int row = c.y / BLOCK_HEIGHT;
+        countAtRow[row]++;
+    }
 
     vector<int> lines;
-    int cellsPerRow = WINDOW_WIDTH / BLOCK_WIDTH;
-    for (auto& [y, c] : countAtY) {
-        if (c >= cellsPerRow)
-            lines.push_back(y);
+    for(auto const& [row, cnt] : countAtRow) {
+        if(cnt >= cols)
+            lines.push_back(row);
     }
     return lines;
 }
 
-void Game::removeLines(const vector<int>& rows){
-    set<int> rowSet(rows.begin(), rows.end());
+void Game::removeLines(const vector<int>& rows) {
+    // Sort so we can binary_search
+    auto sorted = rows;
+    std::sort(sorted.begin(), sorted.end());
 
-    // Remove blocks that are in the cleared rows
-    occupiedBlocks.erase(
-        std::remove_if(occupiedBlocks.begin(), occupiedBlocks.end(),
-            [&](auto& b){return rowSet.count(b.y) > 0;}),
-        occupiedBlocks.end() 
-    );
+    vector<OccupiedCell> keep;
+    keep.reserve(occupiedBlocks.size());
 
-    for (int clearedY : rows) {
-        for (auto& b : occupiedBlocks) {
-            if (b.y < clearedY) { // above the cleared line
-                b.y += BLOCK_HEIGHT; // drop down one row
-            }
-        }
+    for(auto const& oc : occupiedBlocks) {
+        int row = oc.y / BLOCK_HEIGHT;
+        // 1) skip any cell on a cleared row
+        if(std::binary_search(sorted.begin(), sorted.end(), row))
+            continue;
+
+        // 2) count how many cleared rows lie *below* this one
+        int shiftCount = int(std::count_if(
+            sorted.begin(), sorted.end(),
+            [&](int clearedRow){ return clearedRow > row; }
+        ));
+
+        // 3) drop it down
+        OccupiedCell nc = oc;
+        nc.y = (row + shiftCount) * BLOCK_HEIGHT;
+        keep.push_back(nc);
+    }
+
+    occupiedBlocks = std::move(keep);
+    if (!findFullLines().empty()) {
+        clearRows = findFullLines();
+        isClearing = true;
     }
 }

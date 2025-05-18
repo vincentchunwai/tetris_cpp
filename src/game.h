@@ -16,7 +16,7 @@ class Game {
     public:
         // Line Clearing
         bool isClearing = false;
-        float clearDuration = 0.5f;
+        float clearDuration = 0.3f;
         float blinkInterval = 0.1f;
         sf::Clock clearClock;
         vector<int> clearRows;
